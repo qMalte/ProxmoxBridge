@@ -9,6 +9,7 @@ const AuthController_1 = require("./AuthController");
 const EncryptionController_1 = require("./EncryptionController");
 const DomainController_1 = require("./DomainController");
 const SpamQuarantaineController_1 = require("./SpamQuarantaineController");
+const StatsController_1 = require("./StatsController");
 exports.ControllerRegistry = {
     User: new UserController_1.UserController(),
     Group: new GroupController_1.GroupController(),
@@ -18,5 +19,6 @@ exports.ControllerRegistry = {
     Encryption: new EncryptionController_1.EncryptionController(),
     Domain: new DomainController_1.DomainController(),
     SpamQuarantaine: new SpamQuarantaineController_1.SpamQuarantaineController(),
+    Stats: new StatsController_1.StatsController(),
 };
 //# sourceMappingURL=ControllerRegistry.js.map

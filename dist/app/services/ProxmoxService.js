@@ -427,6 +427,37 @@ class ProxmoxService {
             }
         });
     }
+    static getMailStats(retry = true) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.ticket == null) {
+                yield this.createTicket();
+                if (retry) {
+                    return yield this.getMailStats(false);
+                }
+            }
+            try {
+                const cookie = `PMGAuthCookie=${this.ticket};  Path=/; Expires=Sat, 04 May 2024 14:42:19 GMT;`;
+                const req = yield superagent_1.default
+                    .get(`${this.host}/api2/json/statistics/mail`)
+                    .disableTLSCerts()
+                    .set('cookie', cookie)
+                    .timeout(6000);
+                if (req.status === 200) {
+                    return req.body;
+                }
+                else if (req.status === 401) {
+                    yield this.createTicket();
+                    if (retry) {
+                        return yield this.getMailStats(false);
+                    }
+                }
+                return null;
+            }
+            catch (e) {
+                return null;
+            }
+        });
+    }
 }
 ProxmoxService.host = `https://${process.env.PROXMOX_HOST}:8006`;
 exports.ProxmoxService = ProxmoxService;

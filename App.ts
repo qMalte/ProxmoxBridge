@@ -24,15 +24,9 @@ dotenv.config();
 
 class App {
 
-    private certificates = {
-        key: fs.readFileSync('./storage/keys/localhost.key'),
-        cert: fs.readFileSync('./storage/keys/localhost.crt')
-    };
     private app = express();
     private httpServer = http.createServer(this.app);
-    private httpsServer = https.createServer(this.certificates, this.app);
     private httpPort = process.env.HTTP_PORT || 8080;
-    private httpsPort = process.env.HTTPS_PORT || 8443;
 
     private upload = multer({dest: 'uploads/'});
 
@@ -69,9 +63,6 @@ class App {
     listen() {
         this.httpServer.listen(this.httpPort, () => {
             this._log.info(`Der HTTP-Server wurde unter Port: ${this.httpPort} gestartet!`);
-        });
-        this.httpsServer.listen(this.httpsPort, () => {
-            this._log.info(`Der HTTPS-Server wurde unter Port: ${this.httpsPort} gestartet!`);
         });
         return this;
     }
