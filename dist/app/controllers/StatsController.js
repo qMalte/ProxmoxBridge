@@ -20,6 +20,7 @@ class StatsController {
                 return res.status(200).send(stats);
             }
             catch (e) {
+                console.log(e);
                 return res.status(500).send(SystemResources_1.SystemResources.ServerError);
             }
         });

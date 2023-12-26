@@ -63,6 +63,7 @@ class ProxmoxService {
                 return false;
             }
             catch (e) {
+                console.log(e);
                 return false;
             }
         });
@@ -454,6 +455,7 @@ class ProxmoxService {
                 return null;
             }
             catch (e) {
+                console.log(e);
                 return null;
             }
         });

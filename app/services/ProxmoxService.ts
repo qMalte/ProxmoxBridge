@@ -32,6 +32,7 @@ export class ProxmoxService {
 
             return false;
         } catch(e) {
+            console.log(e);
             return false;
         }
     }
@@ -456,6 +457,7 @@ export class ProxmoxService {
 
             return null;
         } catch(e) {
+            console.log(e);
             return null;
         }
     }
