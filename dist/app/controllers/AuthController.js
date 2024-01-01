@@ -304,7 +304,7 @@ class AuthController {
     PostRequestAccess(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (req.body.email == null) {
+                if (req.body.email == null || req.body.email === '') {
                     return res.status(400).send(ValidationResources_1.ValidationResources.MailAddressNotProvided);
                 }
                 const email = req.body.email;
@@ -325,15 +325,14 @@ class AuthController {
                 auth.identifier = StringHelper_1.StringHelper.Generate(8);
                 auth.secret = yield bcrypt_1.default.hash(secret, 10);
                 yield auth.save();
-                const mail = new MailService_1.MailService(email, 'Authentifizierng-Link', `
-                Hallo,\n
-                anbei findest du deinen Link zum Authentifizieren, um deine Spam-Quarantäne zu verwalten.\n
-                ${process.env.URL}/u/${auth.identifier}/${secret}
-            `);
+                const mail = new MailService_1.MailService(email, 'Authentifizierng-Link', `Hallo,\n
+anbei findest du deinen Link zum Authentifizieren, um deine Spam-Quarantäne zu verwalten.\n
+${process.env.URL}/u/${auth.identifier}/${secret}`);
                 yield mail.send();
                 return res.status(200).end();
             }
             catch (e) {
+                console.log(e);
                 return res.status(500).send(SystemResources_1.SystemResources.ServerError);
             }
         });

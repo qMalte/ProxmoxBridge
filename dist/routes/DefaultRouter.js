@@ -13,7 +13,8 @@ router.get("/test", (req, res) => {
 router.get('/publicKey', ControllerRegistry_1.ControllerRegistry.Encryption.GetPublicKey);
 router.get("/stats", ControllerRegistry_1.ControllerRegistry.Stats.GetMailStats);
 router.get("/quarantaine/:identifier/:secret", ControllerRegistry_1.ControllerRegistry.SpamQuarantaine.GetSpamQuarantaine);
-router.get("/mail/:mailId/:identifier/:secret", ControllerRegistry_1.ControllerRegistry.SpamQuarantaine.GetSpamQuarantaine);
+router.get("/mail/:mailId/:identifier/:secret", ControllerRegistry_1.ControllerRegistry.SpamQuarantaine.GetSpamQuarantaineMessage);
+router.post("/quarantaine/mail", ControllerRegistry_1.ControllerRegistry.SpamQuarantaine.PostPerformMessageAction);
 // Permission-Management
 /* router.get("/permissions", AuthMiddleware, ControllerRegistry.Permission.GetPermissions);
 router.get("/permissions/group/:group_id", AuthMiddleware, ControllerRegistry.Permission.GetPermissionsByGroup);

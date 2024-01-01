@@ -127,4 +127,16 @@ export const ValidationResources = {
         'To receive an email, a valid mail ID is required.',
         ['email']
     ),
+    MailActionNotProvided: new Response(
+        'validation_error_mail_action_not_provided',
+        'Um eine Aktion auf einer E-Mail auszuführen, wird eine gültige Aktion benötigt.',
+        'To perform an action on an email, a valid action is required.',
+        ['action']
+    ),
+    MailActionValidateFailed: new Response(
+        'validation_error_mail_action_validate_failed',
+        'Die Aktion auf der E-Mail konnte nicht validiert werden.',
+        'The action on the email could not be validated.',
+        ['action']
+    ),
 }

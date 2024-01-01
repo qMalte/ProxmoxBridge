@@ -8,11 +8,18 @@
         Authentifizierung<br />erforderlich
       </div>
       <div class="input-wrapper">
-        <input type="email" class="input" placeholder="E-Mail">
+        <input [(ngModel)]="email" type="email" class="input" placeholder="E-Mail">
       </div>
       <div class="input-wrapper">
-        <button type="button">Überprüfen</button>
+        <button (click)="requestAccess()" type="button">Überprüfen</button>
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="alertMessage != ''" class="alert">
+  <div class="alert-container">
+    <img src="assets/warning.svg">
+    <div [innerText]="alertMessage"></div>
   </div>
 </div>

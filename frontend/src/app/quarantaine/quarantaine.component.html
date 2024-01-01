@@ -1,0 +1,50 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="left" [ngClass]="selectedMail != null ? 'm-hide' : ''">
+      <div *ngFor="let mail of mails" (click)="getMessage(mail.id)" class="mail-item"
+            [ngClass]="selectedMailId == mail.id ? 'active' : ''">
+        <div class="from" [innerText]="mail.from"></div>
+        <div class="subject" [innerText]="'Betreff: ' + mail.subject"></div>
+        <div class="receiver" [innerText]="'Absender: ' + mail.receiver"></div>
+      </div>
+    </div>
+    <div class="right">
+      <div *ngIf="selectedMail != null" (click)="selectedMail = undefined" class="close-mail">
+        Zurück
+      </div>
+      <div *ngIf="selectedMail != null" class="actions">
+        <button (click)="performMessageAction(selectedMailId, QuarantaineAction.DELIVER)" class="success" type="button">
+          <span>Weiterleiten</span>
+        </button>
+        <button (click)="performMessageAction(selectedMailId, QuarantaineAction.WHITE_LIST)" class="whitelist" type="button">
+          <span>Whitelist</span>
+        </button>
+        <button (click)="performMessageAction(selectedMailId, QuarantaineAction.BLACK_LIST)" class="danger" type="button">
+          <span>Blockieren</span>
+        </button>
+        <button (click)="performMessageAction(selectedMailId, QuarantaineAction.DELETE)" class="delete" type="button">
+          <span>Löschen</span>
+        </button>
+      </div>
+      <div *ngIf="isSigned" class="signed">
+        <img src="assets/shield_classic.svg">
+        <div>Diese E-Mail ist mittels S/MIME signiert.</div>
+      </div>
+      <div *ngIf="selectedMail != null" class="meta">
+        <div>
+          <span>Betreff:</span>
+          <div [innerText]="selectedMail.subject"></div>
+        </div>
+        <div>
+          <span>Absender:</span>
+          <div [innerText]="from"></div>
+        </div>
+        <div>
+          <span>Empfänger:</span>
+          <div [innerText]="recipients"></div>
+        </div>
+      </div>
+      <div *ngIf="selectedMail != null" [innerHTML]="selectedMail?.textAsHtml"></div>
+    </div>
+  </div>
+</div>

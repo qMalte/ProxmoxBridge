@@ -96,6 +96,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.getDomains(false);
                     }
                 }
@@ -129,6 +130,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.addDomain(domain, false);
                     }
                 }
@@ -161,6 +163,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.removeDomain(domain, false);
                     }
                 }
@@ -194,6 +197,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.addTransport(transport, false);
                     }
                 }
@@ -226,6 +230,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.removeTransport(transport, false);
                     }
                 }
@@ -268,6 +273,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.getTransports(false);
                     }
                 }
@@ -312,6 +318,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.getSpamQuarantaine(false);
                     }
                 }
@@ -356,12 +363,14 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.getSpamQuarantaineByReceiver(receiver, false);
                     }
                 }
                 return [];
             }
             catch (e) {
+                console.log(e);
                 return [];
             }
         });
@@ -387,6 +396,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.getMessageFromQuarantaineById(id, false);
                     }
                 }
@@ -408,7 +418,7 @@ class ProxmoxService {
             try {
                 const cookie = `PMGAuthCookie=${this.ticket};  Path=/; Expires=Sat, 04 May 2024 14:42:19 GMT;`;
                 const req = yield superagent_1.default
-                    .get(`${this.host}/api2/json/quarantine/content?id=${id}&action=${action}`)
+                    .post(`${this.host}/api2/json/quarantine/content?id=${id}&action=${action}`)
                     .disableTLSCerts()
                     .set('cookie', cookie)
                     .timeout(6000);
@@ -418,12 +428,14 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.executeQuarantaineActionById(id, action, false);
                     }
                 }
                 return false;
             }
             catch (e) {
+                console.log(e);
                 return false;
             }
         });
@@ -449,6 +461,7 @@ class ProxmoxService {
                 else if (req.status === 401) {
                     yield this.createTicket();
                     if (retry) {
+                        this.ticket = null;
                         return yield this.getMailStats(false);
                     }
                 }

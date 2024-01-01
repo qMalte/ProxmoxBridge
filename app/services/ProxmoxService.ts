@@ -68,6 +68,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.getDomains(false);
                 }
             }
@@ -104,6 +105,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.addDomain(domain, false);
                 }
             }
@@ -139,6 +141,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.removeDomain(domain, false);
                 }
             }
@@ -175,6 +178,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.addTransport(transport, false);
                 }
             }
@@ -210,6 +214,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.removeTransport(transport, false);
                 }
             }
@@ -255,6 +260,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.getTransports(false);
                 }
             }
@@ -302,6 +308,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.getSpamQuarantaine(false);
                 }
             }
@@ -349,12 +356,14 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.getSpamQuarantaineByReceiver(receiver, false);
                 }
             }
 
             return [];
         } catch(e) {
+            console.log(e);
             return [];
         }
     }
@@ -383,6 +392,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.getMessageFromQuarantaineById(id, false);
                 }
             }
@@ -407,7 +417,7 @@ export class ProxmoxService {
             const cookie = `PMGAuthCookie=${this.ticket};  Path=/; Expires=Sat, 04 May 2024 14:42:19 GMT;`;
 
             const req = await superagent
-                .get(`${this.host}/api2/json/quarantine/content?id=${id}&action=${action}`)
+                .post(`${this.host}/api2/json/quarantine/content?id=${id}&action=${action}`)
                 .disableTLSCerts()
                 .set('cookie', cookie)
                 .timeout(6000);
@@ -417,12 +427,14 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.executeQuarantaineActionById(id, action, false);
                 }
             }
 
             return false;
         } catch(e) {
+            console.log(e);
             return false;
         }
     }
@@ -451,6 +463,7 @@ export class ProxmoxService {
             } else if (req.status === 401) {
                 await this.createTicket();
                 if (retry) {
+                    this.ticket = null;
                     return await this.getMailStats(false);
                 }
             }

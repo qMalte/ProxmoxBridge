@@ -24,5 +24,7 @@ exports.ValidationResources = {
     MailAddressInvalidFormat: new Response_1.Response('validation_error_mail_address_invalid_format', 'Das Format der E-Mail-Adresse ist ungültig.', 'The format of the email address is invalid.', ['email']),
     MailAddressNotManaged: new Response_1.Response('validation_error_mail_address_not_managed', 'Die E-Mail-Adresse wird nicht von diesem System verwaltet.', 'The email address is not managed by this system.', ['email']),
     MailIdNotProvided: new Response_1.Response('validation_error_mail_id_not_provided', 'Um eine E-Mail zu erhalten, wird eine gültige Mail-ID benötigt.', 'To receive an email, a valid mail ID is required.', ['email']),
+    MailActionNotProvided: new Response_1.Response('validation_error_mail_action_not_provided', 'Um eine Aktion auf einer E-Mail auszuführen, wird eine gültige Aktion benötigt.', 'To perform an action on an email, a valid action is required.', ['action']),
+    MailActionValidateFailed: new Response_1.Response('validation_error_mail_action_validate_failed', 'Die Aktion auf der E-Mail konnte nicht validiert werden.', 'The action on the email could not be validated.', ['action']),
 };
 //# sourceMappingURL=ValidationResources.js.map

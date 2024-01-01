@@ -13,7 +13,8 @@ router.get('/publicKey', ControllerRegistry.Encryption.GetPublicKey);
 router.get("/stats", ControllerRegistry.Stats.GetMailStats);
 
 router.get("/quarantaine/:identifier/:secret", ControllerRegistry.SpamQuarantaine.GetSpamQuarantaine);
-router.get("/mail/:mailId/:identifier/:secret", ControllerRegistry.SpamQuarantaine.GetSpamQuarantaine);
+router.get("/mail/:mailId/:identifier/:secret", ControllerRegistry.SpamQuarantaine.GetSpamQuarantaineMessage);
+router.post("/quarantaine/mail", ControllerRegistry.SpamQuarantaine.PostPerformMessageAction);
 
 // Permission-Management
 /* router.get("/permissions", AuthMiddleware, ControllerRegistry.Permission.GetPermissions);

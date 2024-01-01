@@ -332,7 +332,7 @@ export class AuthController {
     async PostRequestAccess(req: express.Request, res: express.Response) {
         try {
 
-            if (req.body.email == null) {
+            if (req.body.email == null || req.body.email === '') {
                 return res.status(400).send(ValidationResources.MailAddressNotProvided);
             }
 
@@ -361,17 +361,17 @@ export class AuthController {
             auth.secret = await bcrypt.hash(secret, 10);
             await auth.save();
 
-            const mail = new MailService(email, 'Authentifizierng-Link', `
-                Hallo,\n
-                anbei findest du deinen Link zum Authentifizieren, um deine Spam-Quarantäne zu verwalten.\n
-                ${process.env.URL}/u/${auth.identifier}/${secret}
-            `);
+            const mail = new MailService(email, 'Authentifizierng-Link',
+`Hallo,\n
+anbei findest du deinen Link zum Authentifizieren, um deine Spam-Quarantäne zu verwalten.\n
+${process.env.URL}/u/${auth.identifier}/${secret}`);
 
             await mail.send();
 
             return res.status(200).end();
 
         } catch (e) {
+            console.log(e);
             return res.status(500).send(SystemResources.ServerError);
         }
     }
